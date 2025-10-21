@@ -82,7 +82,7 @@ section {
 }
 
 section h1 {
-  font-size: 15cqw !important;
+  font-size: min(15cqw, 67px) !important;
 }
 
 section p {
