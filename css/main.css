@@ -1,206 +1,392 @@
-/* 为不支持clamp的浏览器提供回退 */
+/* 基础样式回退 */
 section {
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-left: clamp(20px, 8cqw, 48px);
-  padding-right: clamp(20px, 8cqw, 48px);
-
-  /* 移除 justify-items: center; 因为display是block */
-  overflow: hidden !important;
+    padding-left: 20px;
+    padding-right: 20px;
+    overflow: hidden !important;
 }
 
+/* 使用媒体查询模拟clamp效果 */
+@media (min-width: 600px) {
+    section {
+        padding-left: 8vw;
+        padding-right: 8vw;
+    }
+}
+
+@media (min-width: 1200px) {
+    section {
+        padding-left: 48px;
+        padding-right: 48px;
+    }
+}
+
+/* 支持clamp的现代浏览器 */
+@supports (padding: clamp(20px, 8vw, 48px)) {
+    section {
+        padding-left: clamp(20px, 8vw, 48px);
+        padding-right: clamp(20px, 8vw, 48px);
+    }
+}
+
+/* 展览标题 - 使用媒体查询回退 */
 .exhibition-title {
-  font-size: clamp(42.67px, 40cqw, 85.33px) !important;
-  font-weight: 700;
-  line-height: 1.3;
-  margin: 0 0 16px;
-  text-align: center;
-  white-space: nowrap;
-  color: #1a1a1a;
+    font-size: 42.67px !important;
+    font-weight: 700;
+    line-height: 1.3;
+    margin: 0 0 16px;
+    text-align: center;
+    white-space: nowrap;
+    color: #1a1a1a;
 }
 
+@media (min-width: 320px) {
+    .exhibition-title {
+        font-size: 50px !important;
+    }
+}
+
+@media (min-width: 400px) {
+    .exhibition-title {
+        font-size: 65px !important;
+    }
+}
+
+@media (min-width: 480px) {
+    .exhibition-title {
+        font-size: 85.33px !important;
+    }
+}
+
+/* 支持clamp的现代浏览器 */
+@supports (font-size: clamp(42.67px, 10vw, 85.33px)) {
+    .exhibition-title {
+        font-size: clamp(42.67px, 20vw, 85.33px) !important;
+    }
+}
+
+/* 展览副标题 */
 .exhibition-subtitle {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  font-weight: 400;
-  line-height: 1.4;
-  margin: 0 5cqw 24px;
-  text-align: center;
-  color: #4a4a4a;
-  letter-spacing: 0.5px;
-  gap: 4px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    font-weight: 400;
+    line-height: 1.4;
+    margin: 0 5vw 24px;
+    text-align: center;
+    color: #4a4a4a;
+    letter-spacing: 0.5px;
+}
+
+/* 不支持gap的浏览器使用margin */
+.exhibition-subtitle span {
+    display: block;
+    margin-bottom: 4px;
+}
+
+.exhibition-subtitle span:last-child {
+    margin-bottom: 0;
 }
 
 /* 支持gap的浏览器 */
 @supports (gap: 4px) {
-  .exhibition-subtitle {
-    gap: 4px;
-  }
+    .exhibition-subtitle {
+        gap: 4px;
+    }
+
+    .exhibition-subtitle span {
+        margin-bottom: 0;
+    }
 }
 
-/* 不支持gap的浏览器使用margin */
-@supports not (gap: 4px) {
-  .exhibition-subtitle span:not(:last-child) {
-    margin-bottom: 4px;
-  }
-}
-
+/* 副标题span字体大小 - 使用媒体查询回退 */
 .exhibition-subtitle span {
-  display: block;
-  font-size: clamp(37.33px, 32cqw, 72px) !important;
+    font-size: 37.33px !important;
+}
+
+@media (min-width: 320px) {
+    .exhibition-subtitle span {
+        font-size: 45px !important;
+    }
+}
+
+@media (min-width: 400px) {
+    .exhibition-subtitle span {
+        font-size: 55px !important;
+    }
+}
+
+@media (min-width: 480px) {
+    .exhibition-subtitle span {
+        font-size: 72px !important;
+    }
+}
+
+@supports (font-size: clamp(37.33px, 10vw, 72px)) {
+    .exhibition-subtitle span {
+        font-size: clamp(37.33px, 16vw, 72px) !important;
+    }
 }
 
 /* 作者名 */
 .exhibition-author {
-  font-size: clamp(13px, 3.2cqw, 16px);
-  font-weight: 500;
-  margin: 0 5cqw 8px;
-  text-align: center;
-  color: #666;
-  letter-spacing: 1px;
-  text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 500;
+    margin: 0 5vw 8px;
+    text-align: center;
+    color: #666;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+@media (min-width: 500px) {
+    .exhibition-author {
+        font-size: 16px;
+    }
+}
+
+@supports (font-size: clamp(13px, 3.2vw, 16px)) {
+    .exhibition-author {
+        font-size: clamp(13px, 3.2vw, 16px);
+    }
 }
 
 /* 时间 */
 .exhibition-date {
-  font-size: clamp(12px, 3cqw, 15px);
-  font-weight: 300;
-  margin: 0 5cqw 0;
-  text-align: center;
-  color: #999;
-  letter-spacing: 2px;
+    font-size: 12px;
+    font-weight: 300;
+    margin: 0 5vw 0;
+    text-align: center;
+    color: #999;
+    letter-spacing: 2px;
+}
+
+@media (min-width: 500px) {
+    .exhibition-date {
+        font-size: 15px;
+    }
+}
+
+@supports (font-size: clamp(12px, 3vw, 15px)) {
+    .exhibition-date {
+        font-size: clamp(12px, 3vw, 15px);
+    }
 }
 
 /* 整体容器 */
 .exhibition-header {
-  padding: 32px 0;
-  background: #fff;
+    padding: 32px 0;
+    background: #fff;
 }
 
+/* section h1 - 使用媒体查询回退 */
 section h1 {
-  font-size: min(15cqw, 67px) !important;
+    font-size: 48px !important;
 }
 
+@media (max-width: 320px) {
+    section h1 {
+        font-size: 48px !important;
+    }
+}
+
+@media (min-width: 447px) {
+    section h1 {
+        font-size: 67px !important;
+    }
+}
+
+@supports (font-size: min(15vw, 67px)) {
+    section h1 {
+        font-size: min(15vw, 67px) !important;
+    }
+}
+
+/* 段落样式 */
 section p {
-  text-align: justify;
-  /* text-align-last在部分浏览器不支持，保留但提供回退 */
-  text-align-last: left;
-  width: 100%;
-  /* 确保 Safari 正确居中 */
-  padding-left: 7.5%;
-  padding-right: 7.5%;
-  margin-top: 0;
-  margin-bottom: 0;
-  text-indent: 2em;
-  /* 确保box-sizing一致 */
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
+    text-align: justify;
+    text-align-last: left;
+    width: 100%;
+    padding-left: 7.5%;
+    padding-right: 7.5%;
+    margin-top: 0;
+    margin-bottom: 0;
+    text-indent: 2em;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
+/* 引用段落 */
 section p.citation {
-  padding-top: 16px;
-  text-align: right;
-  text-align-last: right;
-  /* 调整margin以保持右对齐 */
-  width: 100%;
-  margin-left: 0;
-  margin-right: 7.5%;
-  color: #999 !important;
+    padding-top: 16px;
+    text-align: right;
+    text-align-last: right;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 7.5%;
+    color: #999 !important;
 }
 
+/* section h2 */
 section h2 {
-  font-size: 15cqw !important;
-  padding-left: 7.5%;
-  text-align: left;
+    font-size: 48px !important;
+    padding-left: 7.5%;
+    text-align: left;
 }
 
+@media (max-width: 320px) {
+    section h2 {
+        font-size: 48px !important;
+    }
+}
+
+@media (min-width: 447px) {
+    section h2 {
+        font-size: 67px !important;
+    }
+}
+
+@supports (font-size: min(15vw, 67px)) {
+    section h2 {
+        font-size: min(15vw, 67px) !important;
+    }
+}
+
+/* section h4 */
 section h4 {
-  padding-left: 7.5%;
-  text-align: left;
-  text-align-last: left;
-  color: rgb(51, 102, 255) !important;
+    padding-left: 7.5%;
+    text-align: left;
+    text-align-last: left;
+    color: rgb(51, 102, 255) !important;
 }
 
+/* 图片样式 */
 section img {
-  width: 85%;
-  height: auto;
-  /* 优化图片显示 */
-  display: block;
-  padding-left: 7.5%;
-  padding-right: auto;
-  max-width: 85%;
+    width: 85%;
+    height: auto;
+    display: block;
+    padding-left: 7.5%;
+    padding-right: auto;
+    max-width: 85%;
 }
 
+/* 横向图片组 */
 section div.horizontal-image-group {
-  width: 53%;
-  /* max-width: 80%; */
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  padding: 4px 0;
+    width: 53%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    padding: 4px 0;
+}
+
+/* 不支持gap的浏览器使用margin */
+section div.horizontal-image-group img {
+    margin-right: 4px;
+}
+
+section div.horizontal-image-group img:last-child {
+    margin-right: 0;
 }
 
 /* 支持gap的浏览器 */
 @supports (gap: 4px) {
-  section div.horizontal-image-group {
-    gap: 4px;
-  }
-}
+    section div.horizontal-image-group {
+        gap: 4px;
+    }
 
-/* 不支持gap的浏览器使用margin */
-@supports not (gap: 4px) {
-  section div.horizontal-image-group img {
-    margin-right: 4px;
-  }
-
-  section div.horizontal-image-group img:last-child {
-    margin-right: 0;
-  }
+    section div.horizontal-image-group img {
+        margin-right: 0;
+    }
 }
 
 section div.horizontal-image-group img {
-  -webkit-box-flex: 1;
-  -webkit-flex: 1 1 0%;
-  -ms-flex: 1 1 0%;
-  flex: 1 1 0%;
-  height: auto;
-  -o-object-fit: contain;
-  object-fit: contain;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 1 0%;
+    -ms-flex: 1 1 0%;
+    flex: 1 1 0%;
+    height: auto;
+    -o-object-fit: contain;
+    object-fit: contain;
 }
 
+/* 移动端容器 */
 .mobile-container {
-  max-width: 430px;
-  min-height: 100vh;
-  margin: 0 auto;
-  background-color: #fff;
-  position: relative;
-
-  /* 关键：声明为容器查询上下文 */
-  container-type: inline-size;
-  container-name: mobile;
+    max-width: 430px;
+    min-height: 100vh;
+    margin: 0 auto;
+    background-color: #fff;
+    position: relative;
 }
 
-/* 只在大屏幕上添加阴影和背景 */
+/* 支持容器查询的现代浏览器 */
+@supports (container-type: inline-size) {
+    .mobile-container {
+        container-type: inline-size;
+        container-name: mobile;
+    }
+
+    /* 在支持容器查询的浏览器中使用cqw */
+    section {
+        padding-left: clamp(20px, 8cqw, 48px);
+        padding-right: clamp(20px, 8cqw, 48px);
+    }
+
+    .exhibition-title {
+        font-size: clamp(42.67px, 40cqw, 85.33px) !important;
+    }
+
+    .exhibition-subtitle {
+        margin: 0 5cqw 24px;
+    }
+
+    .exhibition-subtitle span {
+        font-size: clamp(37.33px, 32cqw, 72px) !important;
+    }
+
+    .exhibition-author {
+        font-size: clamp(13px, 3.2cqw, 16px);
+        margin: 0 5cqw 8px;
+    }
+
+    .exhibition-date {
+        font-size: clamp(12px, 3cqw, 15px);
+        margin: 0 5cqw 0;
+    }
+
+    section h1 {
+        font-size: min(15cqw, 67px) !important;
+    }
+
+    section h2 {
+        font-size: min(15cqw, 67px) !important;
+    }
+}
+
+/* 媒体查询 */
 @media (min-width: 450px) {
-  body {
-    background-color: #f0f0f0;
-  }
+    body {
+        background-color: #f0f0f0;
+    }
 }
 
-/* 小屏幕上全宽显示 */
 @media (max-width: 450px) {
-  .mobile-container {
-    width: 100%;
-  }
+    .mobile-container {
+        width: 100%;
+    }
 }
 
 body {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
 }
