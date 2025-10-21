@@ -1,28 +1,16 @@
 /* 为不支持clamp的浏览器提供回退 */
 section {
-  /* 回退值 */
   padding-left: 20px;
   padding-right: 20px;
-  /* 渐进式支持 */
-  padding-left: min(8vw, 48px);
-  padding-right: min(8vw, 48px);
-  /* 现代浏览器支持 */
-  padding-left: clamp(20px, 8vw, 48px);
-  padding-right: clamp(20px, 8vw, 48px);
+  padding-left: clamp(20px, 8cqw, 48px);
+  padding-right: clamp(20px, 8cqw, 48px);
+
   /* 移除 justify-items: center; 因为display是block */
   overflow: hidden !important;
 }
 
 .exhibition-title {
-  /* 回退值 */
-  font-size: 32px;
-  font-size: 42.67px;
-  /* 32pt ≈ 42.67px */
-  /* 渐进式支持 */
-  font-size: min(40vw, 85.33px);
-  /* 64pt ≈ 85.33px */
-  /* 现代浏览器支持 */
-  font-size: clamp(42.67px, 40vw, 85.33px) !important;
+  font-size: clamp(42.67px, 40cqw, 85.33px) !important;
   font-weight: 700;
   line-height: 1.3;
   margin: 0 0 16px;
@@ -37,18 +25,14 @@ section {
   display: -ms-flexbox;
   display: flex;
   align-items: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
-  /* gap回退方案：使用子元素margin */
   font-weight: 400;
   line-height: 1.4;
-  margin: 0 5vw 24px;
+  margin: 0 5cqw 24px;
   text-align: center;
   color: #4a4a4a;
   letter-spacing: 0.5px;
+  gap: 4px;
 }
 
 /* 支持gap的浏览器 */
@@ -67,26 +51,14 @@ section {
 
 .exhibition-subtitle span {
   display: block;
-  /* 回退值 */
-  font-size: 37.33px;
-  /* 28pt ≈ 37.33px */
-  /* 渐进式支持 */
-  font-size: min(32vw, 72px);
-  /* 54pt ≈ 72px */
-  /* 现代浏览器支持 */
-  font-size: clamp(37.33px, 32vw, 72px) !important;
+  font-size: clamp(37.33px, 32cqw, 72px) !important;
 }
 
 /* 作者名 */
 .exhibition-author {
-  /* 回退值 */
-  font-size: 13px;
-  /* 渐进式支持 */
-  font-size: min(3.2vw, 16px);
-  /* 现代浏览器支持 */
-  font-size: clamp(13px, 3.2vw, 16px);
+  font-size: clamp(13px, 3.2cqw, 16px);
   font-weight: 500;
-  margin: 0 5vw 8px;
+  margin: 0 5cqw 8px;
   text-align: center;
   color: #666;
   letter-spacing: 1px;
@@ -95,14 +67,9 @@ section {
 
 /* 时间 */
 .exhibition-date {
-  /* 回退值 */
-  font-size: 12px;
-  /* 渐进式支持 */
-  font-size: min(3vw, 15px);
-  /* 现代浏览器支持 */
-  font-size: clamp(12px, 3vw, 15px);
+  font-size: clamp(12px, 3cqw, 15px);
   font-weight: 300;
-  margin: 0 5vw 0;
+  margin: 0 5cqw 0;
   text-align: center;
   color: #999;
   letter-spacing: 2px;
@@ -115,7 +82,7 @@ section {
 }
 
 section h1 {
-  font-size: 15vw !important;
+  font-size: 15cqw !important;
 }
 
 section p {
@@ -147,10 +114,9 @@ section p.citation {
 }
 
 section h2 {
-  font-size: 15vw !important;
+  font-size: 15cqw !important;
   padding-left: 7.5%;
   text-align: left;
-  text-align-last: left;
 }
 
 section h4 {
@@ -206,4 +172,35 @@ section div.horizontal-image-group img {
   height: auto;
   -o-object-fit: contain;
   object-fit: contain;
+}
+
+.mobile-container {
+  max-width: 430px;
+  min-height: 100vh;
+  margin: 0 auto;
+  background-color: #fff;
+  position: relative;
+
+  /* 关键：声明为容器查询上下文 */
+  container-type: inline-size;
+  container-name: mobile;
+}
+
+/* 只在大屏幕上添加阴影和背景 */
+@media (min-width: 450px) {
+  body {
+    background-color: #f0f0f0;
+  }
+}
+
+/* 小屏幕上全宽显示 */
+@media (max-width: 450px) {
+  .mobile-container {
+    width: 100%;
+  }
+}
+
+body {
+  margin: 0;
+  padding: 0;
 }
